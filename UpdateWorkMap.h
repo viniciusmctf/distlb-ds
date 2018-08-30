@@ -17,25 +17,23 @@
 
 struct WorkObj {
     int sys_index;
-    int refereced_at;
-    int neighbor;
     double load;
+};
 
-    bool operator<(const WorkObj& rhs) {
-        return load < rhs.load;
-    }
+bool operator<(const WorkObj& lhs, const WorkObj& rhs) {
+    return lhs.load < rhs.load;
+};
 
-    bool operator>(const WorkObj& rhs) {
-        return load > rhs.load;
-    }
+bool operator>(const WorkObj& lhs, const WorkObj& rhs) {
+    return lhs.load > rhs.load;
+};
 
-    bool operator==(const WorkObj& rhs) {
-        return sys_index == rhs.sys_index;
-    }
+bool operator==(const WorkObj& lhs, const WorkObj& rhs) {
+    return lhs.sys_index == rhs.sys_index;
+};
 
-    double operator+(const WorkObj& rhs) {
-        return load + rhs.load;
-    }
+double operator+(const WorkObj& lhs, const WorkObj& rhs) {
+    return lhs.load + rhs.load;
 };
 
 class WorkGroup {
