@@ -14,4 +14,11 @@ Operator **equals** is used to compare `WorkObj` indexes.
 
 ### WorkGroup
 
+**WIP**
+
 ### WorkMap
+
+`WorkMap` is a class container for multiple `WorkObj`.
+
+By standard, it will order `WorkObj`s by `load`, in order to remove them from the `Map`.
+
