@@ -4,10 +4,6 @@ double WorkGroup::sum_work() {
   return 0.0;
 }
 
-std::vector<WorkObj> WorkGroup::get_some(double& load) {
-  return {};
-} // Modify load to actual value
-
 /**
  *
  * End of WorkGroup definitions.
@@ -89,15 +85,6 @@ std::vector<WorkObj> WorkMap::remove_batch_of_load(double& expected_load) {
 
     expected_load = current_batch_load;
     return work_batch;
-}
-
-std::vector<WorkObj> WorkMap::remove_batch_of_load_to_proc(double& expected_load,
-                                                int target_proc) {
-   /**
-    * This is frontier oriented, not used in this implementation;
-    * Meant to be overwriten. Not virtual due to low performance issues.
-    **/
-    return {};
 }
 
 double WorkMap::calculate_total_load() {
