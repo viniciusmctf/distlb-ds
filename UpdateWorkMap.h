@@ -20,29 +20,33 @@ struct WorkObj {
     double load;
 };
 
-bool operator<(const WorkObj& lhs, const WorkObj& rhs) {
+inline bool operator<(const WorkObj& lhs, const WorkObj& rhs) {
     return lhs.load < rhs.load;
-};
+}
 
-bool operator>(const WorkObj& lhs, const WorkObj& rhs) {
+inline bool operator>(const WorkObj& lhs, const WorkObj& rhs) {
     return lhs.load > rhs.load;
-};
+}
 
-bool operator==(const WorkObj& lhs, const WorkObj& rhs) {
+inline bool operator==(const WorkObj& lhs, const WorkObj& rhs) {
     return lhs.sys_index == rhs.sys_index;
-};
+}
 
-double operator+(const WorkObj& lhs, const WorkObj& rhs) {
+inline double operator+(const WorkObj& lhs, const WorkObj& rhs) {
     return lhs.load + rhs.load;
-};
+}
+
+inline double operator+(double lhs, const WorkObj& rhs) {
+    return lhs + rhs.load;
+}
 
 class WorkGroup {
  public:
     double sum_work();
-    std::vector<WorkObj&> get_some(double&); // Modify load to actual value
+    std::vector<WorkObj> get_some(double&); // Modify load to actual value
 
  protected:
-    std::list<WorkObj&> my_work; // Use iterators for easy
+    std::list<WorkObj*> my_work; // Use iterators for easy
     double summed_work; // -1 before first call of sum_work. Should be redefined to -1 everytime some load is removed.
 };
 
@@ -61,7 +65,7 @@ class WorkMap {
  private:
     std::unordered_map<int, WorkObj> all_objs;
     std::vector<WorkGroup> frontiers;
-    std::set<WorkObj&> ordered_objs;
+    std::set<WorkObj> ordered_objs;
     std::set<WorkObj> recent;
     double my_total_load; // should be updated on remove
 

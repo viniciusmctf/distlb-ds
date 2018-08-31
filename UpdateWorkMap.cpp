@@ -4,7 +4,7 @@ double WorkGroup::sum_work() {
   return 0.0;
 }
 
-std::vector<WorkObj&> WorkGroup::get_some(double& load) {
+std::vector<WorkObj> WorkGroup::get_some(double& load) {
   return {};
 } // Modify load to actual value
 
@@ -15,11 +15,7 @@ std::vector<WorkObj&> WorkGroup::get_some(double& load) {
  **/
 
 
-WorkMap::WorkMap(int n_objs, int* objs, double* loads) : all_objs({}), frontiers({}),
-                                my_total_load(0.0) {
-
-  recent = {};
-  ordered_objs = {};
+WorkMap::WorkMap(int n_objs, int* objs, double* loads): my_total_load(0.0) {
   create_obj_naive_map(n_objs, objs, loads);
 }
 
@@ -88,7 +84,7 @@ std::vector<WorkObj> WorkMap::remove_batch_of_load(double& expected_load) {
             current_batch_load -= task.load;
             break;
         }
-        remove(task.sys_index);
+        work_batch.push_back(remove(task.sys_index));
     }
 
     expected_load = current_batch_load;
